@@ -73,18 +73,16 @@ export class App extends React.Component<any, AppState> {
 		return (
 			<div className="container">
 				<h1>Simple card container</h1>
-				<SimpleCardContainer data={items as any}
-									 columns={columns as any}
-									 onSort={this.sort as any} />
-				{/*<scc-simple-card-container [data]="items"
-										[columns]="columns"
-										(sort)="sort($event)">
-					<div *sccCardContent="let myItem">
-						Name: {{myItem.name}}
-						Value: {{myItem.value}}
-					</div>
-					<div *sccCardFooter>Footer</div>
-				</scc-simple-card-container>*/}
+				<SimpleCardContainer data={items}
+									 columns={columns}
+									 cardContent={item => (
+										 <div>
+											<div>Name: {item.name}</div>
+											<div>Value: {item.value}</div>
+										 </div>
+									 )}
+									 cardFooter={() => <div>Footer</div>}
+									 onSort={this.sort} />
 			</div>
 		);
 	}
