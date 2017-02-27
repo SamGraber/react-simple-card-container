@@ -5,6 +5,7 @@ export interface IBreakpointSize {
 	sm?: number;
 	md?: number;
 	lg?: number;
+	[key: string]: number;
 }
 
 export interface IColumn<T> {
