@@ -8,6 +8,7 @@ export interface SimpleCardContainerProps {
 	columns: IColumn<any>[];
 	data: any[];
 	count: number;
+	message?: string;
 	cardContent?: { (item: any): JSX.Element };
 	cardFooter?: { (item: any): JSX.Element };
 	containerHeader?: { (): JSX.Element };
@@ -23,6 +24,7 @@ export class SimpleCardContainer extends React.Component<SimpleCardContainerProp
 			columns,
 			data,
 			count,
+			message,
 			cardContent,
 			cardFooter,
 			containerHeader,
@@ -45,7 +47,7 @@ export class SimpleCardContainer extends React.Component<SimpleCardContainerProp
 							<div className="clearfix"></div>
 						</div>
 
-						{/*<div className="alert alert-info" *ngIf="message">{{message}}</div>*/}
+						{message && <div className="alert alert-info">{message}</div>}
 
 						{data && 
 							data.map((card: any) => (
