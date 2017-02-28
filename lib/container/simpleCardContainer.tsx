@@ -1,29 +1,40 @@
 import * as React from 'react';
 
-import { IColumn } from '../interfaces';
+import { IColumn, IPage } from '../interfaces';
 import { Card } from '../card/card';
 import { ColumnHeader } from '../header/columnHeader';
+import { Pager } from '../pager/pager';
 
 export interface SimpleCardContainerProps {
 	columns: IColumn<any>[];
 	data: any[];
 	count: number;
+	pageNumber: number;
 	message?: string;
 	cardContent?: { (item: any): JSX.Element };
 	cardFooter?: { (item: any): JSX.Element };
 	containerHeader?: { (): JSX.Element };
 	containerFooter?: { (): JSX.Element };
 	onSort: { (sortColumn: IColumn<any>): void };
+	onPage: { (page: IPage): void };
 }
 
 export class SimpleCardContainer extends React.Component<SimpleCardContainerProps, { openCard: any }> {
 	state: { openCard: any } = { openCard: null };
+
+	setPage = (page: number) => {
+		this.props.onPage({
+			pageSize: this.props.data.length,
+			pageNumber: page,
+		});
+	}
 	
 	render(): JSX.Element {
 		const {
 			columns,
 			data,
 			count,
+			pageNumber,
 			message,
 			cardContent,
 			cardFooter,
@@ -67,7 +78,10 @@ export class SimpleCardContainer extends React.Component<SimpleCardContainerProp
 						? containerFooter()
 						: <div className="row">
 							<div className="col-sm-5"><p>Showing <strong>{data.length} of {count || data.length}</strong> total items</p></div>
-							<div className="col-sm-7">Pager placeholder</div>
+							<div className="col-sm-7"><Pager totalCount={count || data.length}
+															 pageSize={data.length}
+															 pageNumber={pageNumber}
+															 onPageChange={this.setPage} /></div>
 						</div>}
 						{/*<div className="card-container-header">
 							<div *ngIf="containerFooter">

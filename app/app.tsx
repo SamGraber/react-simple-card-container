@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { IColumn, SortDirection, SimpleCardContainer } from '../lib';
+import { IColumn, IPage, SortDirection, range, SimpleCardContainer } from '../lib';
 
 export interface ICardItem {
 	id: number;
@@ -42,14 +42,6 @@ const columns = [
 	},
 ];
 
-function range(low: number, high: number): number[] {
-	let numbers = [];
-	for (let i = low; i < high; i++) {
-		numbers.push(i);
-	}
-	return numbers;
-}
-
 export class App extends React.Component<any, AppState> {
 	state = { 
 		items, 
@@ -68,6 +60,21 @@ export class App extends React.Component<any, AppState> {
 		});
 	}
 
+	page = (page: IPage): void => {
+		const previousCount = page.pageSize * (page.pageNumber - 1) + 1;
+		const newItems = range(previousCount, previousCount + page.pageSize).map((num: number): ICardItem => {
+			return {
+				id: num,
+				name: 'Item' + num,
+				value: num,
+			};
+		});
+		this.setState({
+			items: newItems,
+			pageNumber: page.pageNumber,
+		});
+	}
+
 	render(): JSX.Element {
 		const { items, columns, count, pageNumber } = this.state;
 		return (
@@ -76,6 +83,7 @@ export class App extends React.Component<any, AppState> {
 				<SimpleCardContainer data={items}
 									 columns={columns}
 									 count={count}
+									 pageNumber={pageNumber}
 									 cardContent={item => (
 										 <div>
 											<div>Name: {item.name}</div>
@@ -83,7 +91,8 @@ export class App extends React.Component<any, AppState> {
 										 </div>
 									 )}
 									 cardFooter={() => <div>Footer</div>}
-									 onSort={this.sort} />
+									 onSort={this.sort}
+									 onPage={this.page} />
 			</div>
 		);
 	}
