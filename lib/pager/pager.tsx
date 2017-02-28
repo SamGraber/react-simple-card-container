@@ -59,30 +59,30 @@ export const Pager = ({ totalCount, pageSize, pageNumber, onPageChange }: PagerP
 		<ul className="pagination">
 			<li title="Go to first page"
 				onClick={() => first(onPageChange)}
-				className={!canGoBack(pageNumber) && 'disabled'}>
+				className={!canGoBack(pageNumber) ? 'disabled' : ''}>
 				<a><i className="fa fa-angle-double-left"></i></a>
 			</li>
 			<li title="Go to previous page"
 				onClick={() => previous(pageNumber, onPageChange)}
-				className={!canGoBack(pageNumber) && 'disabled'}>
+				className={!canGoBack(pageNumber) ? 'disabled' : ''}>
 				<a><i className="fa fa-angle-left"></i></a>
 			</li>
 			{pages(pageNumber, lastPage).map(page => (
 				<li key={page}
 					title={`Go to page ${page}`} 
 					onClick={() => goto(page, lastPage, onPageChange)}
-					className={page === pageNumber && 'active'}>
+					className={page === pageNumber ? 'active' : ''}>
 					<a>{page}</a>
 				</li>
 			))}
 			<li title="Go to next page"
 				onClick={() => next(pageNumber, lastPage, onPageChange)}
-				className={!canGoForward(pageNumber, lastPage) && 'disabled'}>
+				className={!canGoForward(pageNumber, lastPage) ? 'disabled' : ''}>
 				<a><i className="fa fa-angle-right"></i></a>
 			</li>
 			<li title="Go to last page"
 				onClick={() => last(lastPage, onPageChange)}
-				className={!canGoForward(pageNumber, lastPage) && 'disabled'}>
+				className={!canGoForward(pageNumber, lastPage) ? 'disabled' : ''}>
 				<a><i className="fa fa-angle-double-right"></i></a>
 			</li>
 		</ul>

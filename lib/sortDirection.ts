@@ -11,7 +11,7 @@ export class SortDirection {
 
 	constructor(private value: number) { }
 
-	public static toggle(direction: SortDirection): SortDirection {
+	public static toggle(direction: SortDirection | undefined): SortDirection {
 		if (direction === SortDirection.ascending) {
 			return SortDirection.descending;
 		} else if (direction === SortDirection.descending) {

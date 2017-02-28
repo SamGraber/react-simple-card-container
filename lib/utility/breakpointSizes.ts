@@ -37,8 +37,8 @@ export function buildSizes(sizes: IBreakpointSize | number): IBreakpointSize {
 }
 
 function getColumnClass(columnSizes: IBreakpointSize, attribute: string): string {
-	const value: number | string = columnSizes[attribute];
-	if (value > 0) {
+	const value: number | undefined = columnSizes[attribute];
+	if (value && value > 0) {
 		return `col-${attribute}-${value}`;
 	} else {
 		return 'hidden-' + attribute;
