@@ -83,18 +83,6 @@ export class SimpleCardContainer extends React.Component<SimpleCardContainerProp
 															 pageNumber={pageNumber}
 															 onPageChange={this.setPage} /></div>
 						</div>}
-						{/*<div className="card-container-header">
-							<div *ngIf="containerFooter">
-								<template [ngTemplateOutlet]="containerFooter.template"></template>
-							</div>
-							<div className="row" *ngIf="!containerFooter">
-								<div className="col-sm-5"><p>Showing <strong>{{data.length}} of {{totalItems}}</strong> total items</p></div>
-								<div className="col-sm-7"><scc-pager [totalCount]="totalItems"
-																[pageSize]="data.length"
-																[pageNumber]="pageNumber"
-																(pageNumberChange)="setPage($event)"></scc-pager></div>
-							</div>
-						</div>*/}
 					</div>
 				</div>
 			</div>
