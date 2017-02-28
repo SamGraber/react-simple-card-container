@@ -14,6 +14,7 @@ const changeSort = (column: IColumn<any>, onSort: { (column: IColumn<any>): void
 
 export const ColumnHeader = ({ column, onSort }: { column: IColumn<any>, onSort: { (column: IColumn<any>): void }}) => (
 	<div className={`column-header ${getClass(column.size)}`}
+		 onClick={() => changeSort(column, onSort)}
 		 title={column.description || ''}>
 		<div><h5>{column.label}</h5></div>
 		{column.sortDirection === SortDirection.ascending && <i className="fa fa-sort-asc"></i>}
