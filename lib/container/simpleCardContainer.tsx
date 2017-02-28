@@ -47,7 +47,9 @@ export class SimpleCardContainer extends React.Component<SimpleCardContainerProp
 			<div className="row">
 				<div className="col-xs-12">
 					<div className="card-container">
-						{containerHeader && containerHeader()}
+						<div className="card-container-header">
+							{containerHeader && containerHeader()}
+						</div>
 						
 						<div className="card-columns-header">
 							{columns.map(column => (
@@ -74,15 +76,17 @@ export class SimpleCardContainer extends React.Component<SimpleCardContainerProp
 							))
 						}
 						
-						{containerFooter 
-						? containerFooter()
-						: <div className="row">
-							<div className="col-sm-5"><p>Showing <strong>{data.length} of {count || data.length}</strong> total items</p></div>
-							<div className="col-sm-7"><Pager totalCount={count || data.length}
-															 pageSize={data.length}
-															 pageNumber={pageNumber}
-															 onPageChange={this.setPage} /></div>
-						</div>}
+						<div className="card-container-footer">
+							{containerFooter 
+							? containerFooter()
+							: <div className="row">
+								<div className="col-sm-5"><p>Showing <strong>{data.length} of {count || data.length}</strong> total items</p></div>
+								<div className="col-sm-7"><Pager totalCount={count || data.length}
+																 pageSize={data.length}
+																 pageNumber={pageNumber}
+																 onPageChange={this.setPage} /></div>
+							</div>}
+						</div>
 					</div>
 				</div>
 			</div>
