@@ -69,12 +69,13 @@ export class App extends React.Component<any, AppState> {
 	}
 
 	render(): JSX.Element {
-		const { items, columns } = this.state;
+		const { items, columns, count, pageNumber } = this.state;
 		return (
 			<div className="container">
 				<h1>Simple card container</h1>
 				<SimpleCardContainer data={items}
 									 columns={columns}
+									 count={count}
 									 cardContent={item => (
 										 <div>
 											<div>Name: {item.name}</div>

@@ -7,8 +7,11 @@ import { ColumnHeader } from '../header/columnHeader';
 export interface SimpleCardContainerProps {
 	columns: IColumn<any>[];
 	data: any[];
+	count: number;
 	cardContent?: { (item: any): JSX.Element };
 	cardFooter?: { (item: any): JSX.Element };
+	containerHeader?: { (): JSX.Element };
+	containerFooter?: { (): JSX.Element };
 	onSort: { (sortColumn: IColumn<any>): void };
 }
 
@@ -16,12 +19,23 @@ export class SimpleCardContainer extends React.Component<SimpleCardContainerProp
 	state: { openCard: any } = { openCard: null };
 	
 	render(): JSX.Element {
-		const { columns, data, cardContent, cardFooter, onSort } = this.props;
+		const {
+			columns,
+			data,
+			count,
+			cardContent,
+			cardFooter,
+			containerHeader,
+			containerFooter,
+			onSort,
+		} = this.props;
 		const { openCard } = this.state;
 		return (
 			<div className="row">
 				<div className="col-xs-12">
 					<div className="card-container">
+						{containerHeader && containerHeader()}
+						
 						<div className="card-columns-header">
 							{columns.map(column => (
 								<ColumnHeader key={column.name}
@@ -47,6 +61,12 @@ export class SimpleCardContainer extends React.Component<SimpleCardContainerProp
 							))
 						}
 						
+						{containerFooter 
+						? containerFooter()
+						: <div className="row">
+							<div className="col-sm-5"><p>Showing <strong>{data.length} of {count || data.length}</strong> total items</p></div>
+							<div className="col-sm-7">Pager placeholder</div>
+						</div>}
 						{/*<div className="card-container-header">
 							<div *ngIf="containerFooter">
 								<template [ngTemplateOutlet]="containerFooter.template"></template>
