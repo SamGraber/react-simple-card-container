@@ -35,17 +35,14 @@ export const Card = ({ item, isOpen, columns, cardContent, cardFooter, onOpen, o
 		</div>
 		
 		{isOpen && cardContent &&
-		<div>
 			<div className="body">
 				{cardContent(item)}
 				<div className="clearfix"></div>
-			</div>
-		</div>}
-		{/*<div [hidden]="!isOpen">
-			<div className="footer" *ngIf="cardContainer.cardFooter">
-				<template [ngTemplateOutlet]="cardContainer.cardFooter.template" [ngOutletContext]="{ $implicit: item }"></template>
+			</div>}
+		{isOpen && cardFooter &&
+			<div className="footer">
+				{cardFooter(item)}
 				<div className="clearfix"></div>
-			</div>
-		</div>*/}
+			</div>}
 	</div>
 );
