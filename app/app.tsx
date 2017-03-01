@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { IColumn, IPage, SortDirection, range, SimpleCardContainer } from '../lib';
-import { connect, setState } from './devtools/devtools';
+import { connect, persistState } from './devtools/devtools';
 
 export interface ICardItem {
 	id: number;
@@ -52,11 +52,11 @@ export class App extends React.Component<any, AppState> {
 	};
 
 	componentWillMount(): void {
-		connect(state => super.setState(state));
+		connect(state => super.setState(state), message => console.log(message.type, ':', message.payload && message.payload.type));
 	}
 
 	setState(state: any): void {
-		super.setState(state, () => setState(this.state));
+		super.setState(state, () => persistState(this.state));
 	}
 
 	sort = (sortColumn: IColumn<ICardItem>): void => {
