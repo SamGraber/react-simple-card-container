@@ -11,6 +11,10 @@ export function connect(getState: { ( state: any ): void }): Function {
 			if (message.type === 'DISPATCH' && message.payload.type === 'JUMP_TO_ACTION') {
 				getState(JSON.parse(message.state));
 			}
+			if (message.type === 'DISPATCH' && message.payload.type === 'IMPORT_STATE') {
+				const state = message.payload.nextLiftedState.computedStates[message.payload.nextLiftedState.currentStateIndex].state;
+				getState(state);
+			}
 		});
 
 		return () => {
