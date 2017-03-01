@@ -17,7 +17,7 @@ export const ColumnHeader = ({ column, onSort }: { column: IColumn<any>, onSort:
 		 onClick={() => changeSort(column, onSort)}
 		 title={column.description || ''}>
 		<div><h5>{column.label}</h5></div>
-		{column.sortDirection === SortDirection.ascending && <i className="fa fa-sort-asc"></i>}
-		{column.sortDirection === SortDirection.descending && <i className="fa fa-sort-desc"></i>}
+		{SortDirection.ascending.equals(column.sortDirection) && <i className="fa fa-sort-asc"></i>}
+		{SortDirection.descending.equals(column.sortDirection) && <i className="fa fa-sort-desc"></i>}
 	</div>
 );
